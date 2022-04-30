@@ -27,7 +27,7 @@ logger.setLevel(logging.ERROR)
 BUTTONS = {}
 SPELL_CHECK = {}
 FILTER_MODE = {}
-SEND_CHANNEL = int(os.environ.get("SEND_CHANNEL")
+SEND_CHANNEL = int(os.environ.get("SEND_CHANNEL"))
 SEND_USERNAME = os.environ.get("USERNAME")
 
 @Client.on_message(filters.command('autofilter'))
