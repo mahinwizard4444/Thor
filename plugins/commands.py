@@ -195,7 +195,7 @@ async def start(client, message):
                InlineKeyboardButton("📥 Download Link 📥", url=f"{filess.link}")
                ],[
                InlineKeyboardButton("⚠️ Can't Access❓ Click Here ⚠️", url=f"https://t.me/{SEND_USERNAME}")
-               ]])
+               ]]))
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
 async def channel_info(bot, message):
