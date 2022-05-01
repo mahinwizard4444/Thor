@@ -19,6 +19,7 @@ BATCH_FILES = {}
 SEND_CHANNEL = int(os.environ.get("SEND_CHANNEL"))
 SEND_USERNAME = os.environ.get("USERNAME")
 
+
 @Client.on_message(filters.command("start") & filters.incoming & ~filters.edited)
 async def start(client, message):
     if message.chat.type in ['group', 'supergroup']:
@@ -128,7 +129,7 @@ async def start(client, message):
             if f_caption is None:
                 f_caption = f"{title}"
             await client.send_cached_media(
-                chat_id=SEND_CHANNEL,
+                chat_id=message.from_user.id,
                 file_id=msg.get("file_id"),
                 caption=f_caption,
                 )
@@ -152,7 +153,7 @@ async def start(client, message):
     if not files_:
         try:
             msg = await client.send_cached_media(
-                chat_id=SEND_CHANNEL,
+                chat_id=message.from_user.id,
                 file_id=file_id
                 )
             filetype = msg.media
@@ -183,7 +184,7 @@ async def start(client, message):
     if f_caption is None:
         f_caption = f"{files.file_name}"
     await client.send_cached_media(
-        chat_id=SEND_CHANNEL,
+        chat_id=message.from_user.id,
         file_id=file_id,
         caption=f_caption,
         reply_markup=MOVIE_BTNS
