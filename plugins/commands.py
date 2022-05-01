@@ -136,10 +136,6 @@ async def start(client, message):
                ],[
                InlineKeyboardButton("⚠️ Can't Access❓ Click Here ⚠️", url=f"https://t.me/{SEND_USERNAME}")
                ]])
-        await query.message.reply(text=f"""Hey 👋 {query.from_user.mention} 😍
-📫 Yᴏʀ Fɪʟᴇ ɪꜱ Rᴇᴀᴅʏ 👇
-📂 Mᴏᴠɪᴇ Nᴀᴍᴇ : {title}
-⚙️ Mᴏᴠɪᴇ Sɪᴢᴇ : {size}""")
         await sts.delete()
         return
     elif file_id.split("-", 1)[0] == "DSTORE":
@@ -200,11 +196,6 @@ async def start(client, message):
                ],[
                InlineKeyboardButton("⚠️ Can't Access❓ Click Here ⚠️", url=f"https://t.me/{SEND_USERNAME}")
                ]])
-        await query.message.reply(text=f"""Hey 👋 {query.from_user.mention} 😍
-📫 Yᴏʀ Fɪʟᴇ ɪꜱ Rᴇᴀᴅʏ 👇
-📂 Mᴏᴠɪᴇ Nᴀᴍᴇ : {title}
-⚙️ Mᴏᴠɪᴇ Sɪᴢᴇ : {size}""")
-                    
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
 async def channel_info(bot, message):
