@@ -417,9 +417,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             if AUTH_CHANNEL and not await is_subscribed(client, query):
                 await query.answer(url=f"https://t.me/TheAutoFilterBot?start={file_id}")
                 return
-            elif P_TTI_SHOW_OFF:
-                await query.answer(url=f"https://t.me/1TheAutoFilterBot?start={file_id}")
-                return
+      
             else:
                 await client.send_cached_media(
                     chat_id=SEND_CHANNEL,
