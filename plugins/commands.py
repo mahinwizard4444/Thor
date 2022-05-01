@@ -16,7 +16,8 @@ import base64
 logger = logging.getLogger(__name__)
 
 BATCH_FILES = {}
-
+SEND_CHANNEL = int(os.environ.get("SEND_CHANNEL"))
+SEND_USERNAME = os.environ.get("USERNAME")
 
 @Client.on_message(filters.command("start") & filters.incoming & ~filters.edited)
 async def start(client, message):
@@ -128,14 +129,9 @@ async def start(client, message):
                 f_caption = f"{title}"
             await client.send_cached_media(
                 chat_id=SEND_CHANNEL,
-                file_id=file_id,
+                file_id=msg.get("file_id"),
                 caption=f_caption,
-                reply_markup=InlineKeyboardMarkup(
-       [[
-               InlineKeyboardButton("📥 Download Link 📥", url=f"{filess.link}")
-               ],[
-               InlineKeyboardButton("⚠️ Can't Access❓ Click Here ⚠️", url=f"https://t.me/{SEND_USERNAME}")
-               ]])
+                )
         await sts.delete()
         return
     elif file_id.split("-", 1)[0] == "DSTORE":
@@ -156,7 +152,7 @@ async def start(client, message):
     if not files_:
         try:
             msg = await client.send_cached_media(
-                chat_id=message.from_user.id,
+                chat_id=SEND_CHANNEL,
                 file_id=file_id
                 )
             filetype = msg.media
@@ -188,14 +184,11 @@ async def start(client, message):
         f_caption = f"{files.file_name}"
     await client.send_cached_media(
         chat_id=SEND_CHANNEL,
-                file_id=file_id,
-                caption=f_caption,
-                reply_markup=InlineKeyboardMarkup(
-       [[
-               InlineKeyboardButton("📥 Download Link 📥", url=f"{filess.link}")
-               ],[
-               InlineKeyboardButton("⚠️ Can't Access❓ Click Here ⚠️", url=f"https://t.me/{SEND_USERNAME}")
-               ]]))
+        file_id=file_id,
+        caption=f_caption,
+        reply_markup=MOVIE_BTNS
+        )
+                    
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
 async def channel_info(bot, message):
