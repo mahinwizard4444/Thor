@@ -127,10 +127,19 @@ async def start(client, message):
             if f_caption is None:
                 f_caption = f"{title}"
             await client.send_cached_media(
-                chat_id=message.from_user.id,
-                file_id=msg.get("file_id"),
+                chat_id=SEND_CHANNEL,
+                file_id=file_id,
                 caption=f_caption,
-                )
+                reply_markup=InlineKeyboardMarkup(
+       [[
+               InlineKeyboardButton("📥 Download Link 📥", url=f"{filess.link}")
+               ],[
+               InlineKeyboardButton("⚠️ Can't Access❓ Click Here ⚠️", url=f"https://t.me/{SEND_USERNAME}")
+               ]]
+        await query.message.reply(text=f"""Hey 👋 {query.from_user.mention} 😍
+📫 Yᴏʀ Fɪʟᴇ ɪꜱ Rᴇᴀᴅʏ 👇
+📂 Mᴏᴠɪᴇ Nᴀᴍᴇ : {title}
+⚙️ Mᴏᴠɪᴇ Sɪᴢᴇ : {size}""", reply_markup=reply_markup)
         await sts.delete()
         return
     elif file_id.split("-", 1)[0] == "DSTORE":
@@ -182,11 +191,19 @@ async def start(client, message):
     if f_caption is None:
         f_caption = f"{files.file_name}"
     await client.send_cached_media(
-        chat_id=message.from_user.id,
-        file_id=file_id,
-        caption=f_caption,
-        reply_markup=MOVIE_BTNS
-        )
+        chat_id=SEND_CHANNEL,
+                file_id=file_id,
+                caption=f_caption,
+                reply_markup=InlineKeyboardMarkup(
+       [[
+               InlineKeyboardButton("📥 Download Link 📥", url=f"{filess.link}")
+               ],[
+               InlineKeyboardButton("⚠️ Can't Access❓ Click Here ⚠️", url=f"https://t.me/{SEND_USERNAME}")
+               ]]
+        await query.message.reply(text=f"""Hey 👋 {query.from_user.mention} 😍
+📫 Yᴏʀ Fɪʟᴇ ɪꜱ Rᴇᴀᴅʏ 👇
+📂 Mᴏᴠɪᴇ Nᴀᴍᴇ : {title}
+⚙️ Mᴏᴠɪᴇ Sɪᴢᴇ : {size}""", reply_markup=reply_markup)
                     
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
